@@ -36,3 +36,12 @@ if st.button("Predict Score"):
 
 with st.expander("See Training Data"):
     st.dataframe(df)
+
+
+
+st.sidebar.markdown("---")  
+st.sidebar.header("About the Creator")
+st.sidebar.write("👤 Name: Fatin Ilham")
+st.sidebar.write("📸 Instagram: [@spiritofhonestyy](https://instagram.com/yourhandle)")
+st.sidebar.write("💻 GitHub: [Fatin's GitHub](https://github.com/fatin-ilham)")
+st.sidebar.write("📧 Email: fatin.ilham@g.bracu.ac.bd")
