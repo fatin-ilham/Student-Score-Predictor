@@ -4,13 +4,33 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 
-data = {
-    'hours_studied': [2, 5, 1, 4, 6, 3, 7, 8, 9, 10],
-    'sleep_hours': [6, 7, 5, 6, 8, 7, 7, 8, 9, 8],
-    'attendance': [70, 85, 60, 90, 95, 80, 88, 92, 96, 98],
-    'score': [50, 80, 40, 75, 92, 65, 85, 90, 95, 98]
-}
-df = pd.DataFrame(data)
+import numpy as np
+
+np.random.seed(42)  # for reproducibility
+
+n = 50  # number of samples
+hours_studied = np.random.randint(0, 11, n)      # 0–10 hours
+sleep_hours = np.random.randint(4, 11, n)        # 4–10 hours
+attendance = np.random.randint(50, 101, n)       # 50%–100%
+
+# realistic score calculation with some noise
+score = (
+    hours_studied * 7       # 1 extra hour adds ~7 points
+    + sleep_hours * 2       # 1 extra hour sleep adds ~2 points
+    + (attendance - 50) * 0.3  # attendance contributes moderately
+    + np.random.normal(0, 5, n)  # add noise
+)
+
+# clip scores to 0–100
+score = np.clip(score, 0, 100)
+
+df = pd.DataFrame({
+    'hours_studied': hours_studied,
+    'sleep_hours': sleep_hours,
+    'attendance': attendance,
+    'score': score.round(1)
+})
+
 
 
 X = df[['hours_studied', 'sleep_hours', 'attendance']]
@@ -46,5 +66,6 @@ st.sidebar.write("📸 Instagram: [@spiritofhonestyy](https://www.instagram.com/
 st.sidebar.write("📘 Facebook: [Fatin Ilham](https://www.facebook.com/profile.php?id=61572732399921)")
 st.sidebar.write("💻 GitHub: [Fatin's GitHub](https://github.com/fatin-ilham)")
 st.sidebar.write("📧 Email: fatin.ilham@g.bracu.ac.bd")
+
 
 
