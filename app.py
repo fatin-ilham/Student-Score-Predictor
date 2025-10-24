@@ -6,22 +6,22 @@ from sklearn.model_selection import train_test_split
 
 import numpy as np
 
-np.random.seed(42)  # for reproducibility
+np.random.seed(42)  
 
 n = 50  # number of samples
-hours_studied = np.random.randint(0, 11, n)      # 0–10 hours
-sleep_hours = np.random.randint(4, 11, n)        # 4–10 hours
-attendance = np.random.randint(50, 101, n)       # 50%–100%
+hours_studied = np.random.randint(0, 11, n)      
+sleep_hours = np.random.randint(4, 11, n)        
+attendance = np.random.randint(50, 101, n)       
 
-# realistic score calculation with some noise
+
 score = (
-    hours_studied * 7       # 1 extra hour adds ~7 points
-    + sleep_hours * 2       # 1 extra hour sleep adds ~2 points
-    + (attendance - 50) * 0.3  # attendance contributes moderately
-    + np.random.normal(0, 5, n)  # add noise
+    hours_studied * 7       
+    + sleep_hours * 2       
+    + (attendance - 50) * 0.3  
+    + np.random.normal(0, 5, n)  
 )
 
-# clip scores to 0–100
+
 score = np.clip(score, 0, 100)
 
 df = pd.DataFrame({
@@ -51,7 +51,7 @@ attendance = st.slider("Attendance (%)", 50, 100, 85)
 
 if st.button("Predict Score"):
     predicted = model.predict([[hours, sleep, attendance]])[0]
-    predicted = max(0, min(predicted, 100))  # ensure score stays between 0–100
+    predicted = max(0, min(predicted, 100)) 
 
    
     st.success(f"🎯 Predicted Score: {predicted:.2f}")
@@ -69,6 +69,7 @@ st.sidebar.write("📸 Instagram: [@spiritofhonestyy](https://www.instagram.com/
 st.sidebar.write("📘 Facebook: [Fatin Ilham](https://www.facebook.com/profile.php?id=61572732399921)")
 st.sidebar.write("💻 GitHub: [Fatin's GitHub](https://github.com/fatin-ilham)")
 st.sidebar.write("📧 Email: fatin.ilham@g.bracu.ac.bd")
+
 
 
 
