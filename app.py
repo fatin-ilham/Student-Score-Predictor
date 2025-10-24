@@ -51,6 +51,9 @@ attendance = st.slider("Attendance (%)", 50, 100, 85)
 
 if st.button("Predict Score"):
     predicted = model.predict([[hours, sleep, attendance]])[0]
+    predicted = max(0, min(predicted, 100))  # ensure score stays between 0–100
+
+   
     st.success(f"🎯 Predicted Score: {predicted:.2f}")
 
 
@@ -66,6 +69,7 @@ st.sidebar.write("📸 Instagram: [@spiritofhonestyy](https://www.instagram.com/
 st.sidebar.write("📘 Facebook: [Fatin Ilham](https://www.facebook.com/profile.php?id=61572732399921)")
 st.sidebar.write("💻 GitHub: [Fatin's GitHub](https://github.com/fatin-ilham)")
 st.sidebar.write("📧 Email: fatin.ilham@g.bracu.ac.bd")
+
 
 
 
